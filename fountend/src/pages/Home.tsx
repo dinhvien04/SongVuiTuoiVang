@@ -4,6 +4,7 @@ import Activities from '../components/Activities';
 import About from '../components/About';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
+import HotlineButton from '../components/HotlineButton';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         </main>
         <Footer />
       </div>
+      <HotlineButton />
     </div>
   );
 }

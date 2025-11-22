@@ -12,7 +12,7 @@ const activities = [
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAgc25WwHQusokhqfJOuxjjCkmr3EaOwvtdMc1WT9i9mz3TtPh6pRMAoBaJ28s_qJr1a-5MttCZrI7Yu3ONtHLuCmlgXkkFEQttiK9PkCGZVOjrlInmss8WFdoNQMyE2Fpx-666adC6e6Wtuzq5oJ_VQ7kGhXpjDmefyyGOKfJgHty_RcHRhLFaViV0pwHkyH9ISLaXaP_c1nsHYiO0z3RAhOFojmC40z24KxVhygDQTa0s1LDAe2kzlKk_iR4NkKROG4fD8OHuv8io",
   },
   {
-    title: "Tour du lịch Đà Lạt",
+    title: "Tour du lịch Quy Nhơn",
     description: "Tận hưởng không khí trong lành và cảnh đẹp.",
     image:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAk0KLadiyYhvJ2FbmwCfMfPwxkF_glS5ZRhUjHaHtyKpuvsHRs_AT2Z2ARqhTaHIvO0TQb__M7JCr65vRrUSAWZRnvaY-ZDxlOxn6zDUN9l7PCBtOL8eGJOnkuUKzS0hZVvkZedM6f5mPN1D_tZsuSA0kpSS-B_STmXFXwgHivizR0xfhe5cwELQr_qYYfcylNZXqBmhkFxd_9cnOu1vLCe5VvoyV3cwSexUct2hlZj-ieAoF5_2VBtqvZhHLmQxbe9oAcc0cHTzvF",
@@ -27,20 +27,26 @@ const activities = [
 
 export default function Activities() {
   return (
-    <section className="py-12">
-      <h2 className="text-2xl font-bold mb-6">Hoạt Động Nổi Bật</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section className="py-8 md:py-12 px-2 md:px-0">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">
+        Hoạt Động Nổi Bật
+      </h2>
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
         {activities.map((activity, index) => (
           <div key={index} className="group cursor-pointer">
-            <div className="rounded-lg overflow-hidden mb-3">
-              <img 
+            <div className="rounded-lg overflow-hidden mb-2 md:mb-3">
+              <img
                 src={activity.image}
                 alt={activity.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-32 md:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <h3 className="font-semibold mb-1">{activity.title}</h3>
-            <p className="text-sm text-gray-600">{activity.description}</p>
+            <h3 className="font-semibold text-sm md:text-base mb-1">
+              {activity.title}
+            </h3>
+            <p className="text-xs md:text-sm text-gray-600">
+              {activity.description}
+            </p>
           </div>
         ))}
       </div>

@@ -19,15 +19,17 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-2">Chia sẻ từ thành viên</h2>
+    <section className="py-8 md:py-12 bg-gray-50 -mx-4 px-4 md:mx-0 md:px-0 md:rounded-xl">
+      <div className="text-center mb-6 md:mb-8">
+        <h2 className="text-xl md:text-2xl font-bold mb-2">
+          Chia sẻ từ thành viên
+        </h2>
         <p className="text-gray-600">
           Lắng nghe những câu chuyện và trải nghiệm tuyệt vời từ cộng đồng của chúng tôi.
         </p>
       </div>
-      
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+      <div className="grid md:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
         {testimonials.map((testimonial, index) => (
           <div key={index} className="bg-white p-8 rounded-lg text-center">
             <img 

@@ -1,12 +1,14 @@
 export default function About() {
   return (
-    <section className="py-12">
-      <h2 className="text-2xl font-bold mb-4">Về Chúng Tôi</h2>
-      <p className="text-gray-600 mb-8 max-w-3xl">
+    <section className="py-8 md:py-12 px-2 md:px-0">
+      <h2 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
+        Về Chúng Tôi
+      </h2>
+      <p className="text-sm md:text-base text-gray-600 mb-6 md:mb-8 max-w-3xl">
         Sứ mệnh của chúng tôi là tạo ra một không gian kết nối, nơi người cao tuổi có thể tìm thấy niềm vui, duy trì sức khỏe và làm phong phú thêm đời sống tinh thần mỗi ngày.
       </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="flex flex-col items-center text-center p-6 border rounded-lg">
           <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
             <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

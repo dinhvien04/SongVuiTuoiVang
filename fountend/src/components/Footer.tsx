@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="mt-16 border-t pt-12 pb-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <footer className="mt-8 md:mt-16 border-t pt-8 md:pt-12 pb-6 md:pb-8 px-2 md:px-0">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
         <div>
           <div className="flex items-center gap-2 mb-3">
             <div className="w-5 h-5">
@@ -31,9 +31,11 @@ export default function Footer() {
           <p className="text-sm text-gray-600">Điện thoại: 1900 1234</p>
         </div>
       </div>
-      
-      <div className="border-t pt-6 text-center">
-        <p className="text-sm text-gray-500">© 2024 Sống Vui Khỏe. All rights reserved.</p>
+
+      <div className="border-t pt-4 md:pt-6 text-center">
+        <p className="text-xs md:text-sm text-gray-500">
+          © 2024 Sống Vui Khỏe. All rights reserved.
+        </p>
       </div>
     </footer>
   );
