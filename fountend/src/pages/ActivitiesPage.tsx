@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HotlineButton from '../components/HotlineButton';
@@ -8,6 +9,7 @@ export default function ActivitiesPage() {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedPackage, setSelectedPackage] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlineFilter, setOnlineFilter] = useState(false);
   const [offlineFilter, setOfflineFilter] = useState(false);
@@ -62,7 +64,7 @@ export default function ActivitiesPage() {
 
               {/* Category Filters */}
               <div className="mb-6">
-                <h3 className="text-sm font-bold mb-3">Loại Hoạt Động</h3>
+                <h3 className="text-sm font-bold mb-3">Loại Dịch Vụ</h3>
                 <div className="space-y-2">
                   <button
                     onClick={() => setSelectedCategory('all')}
@@ -152,6 +154,7 @@ export default function ActivitiesPage() {
               <button
                 onClick={() => {
                   setSelectedCategory('all');
+                  setSelectedPackage('all');
                   setOnlineFilter(false);
                   setOfflineFilter(false);
                   setSearchQuery('');
@@ -171,9 +174,119 @@ export default function ActivitiesPage() {
                 Khám Phá Dịch Vụ
               </h1>
               <p className="text-gray-600">
-                Tìm kiếm các hoạt động thú vị và bổ ích dành cho bạn
+                Tìm kiếm các dịch vụ chăm sóc và hoạt động phù hợp với bạn
               </p>
             </div>
+
+            {/* Package Cards - Show when category is "all" */}
+            {selectedCategory === 'all' && !searchQuery && (
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold mb-4">Gói Dịch Vụ Chăm Sóc</h2>
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                  {/* VIP Package Card */}
+                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl border-2 border-amber-400 p-6 hover:shadow-xl transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-4xl">👑</span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-amber-700">
+                          Gói VIP
+                        </h3>
+                        <p className="text-sm text-amber-600">
+                          Cao cấp & Toàn diện
+                        </p>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-lg p-4 mb-4">
+                      <p className="text-3xl font-bold text-amber-600">
+                        180,000 - 400,000đ
+                      </p>
+                      <p className="text-sm text-gray-600">VNĐ/tháng</p>
+                    </div>
+                    <ul className="space-y-2 mb-4">
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Phòng đơn/đôi cao cấp 4-5 sao</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Tỉ lệ chăm sóc 1:2-3</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Bác sĩ theo dõi thường xuyên</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Thực đơn riêng biệt</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Dịch vụ làm đẹp cao cấp</span>
+                      </li>
+                    </ul>
+                    <Link
+                      to="/packages"
+                      className="block w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-center rounded-lg font-bold hover:from-amber-500 hover:to-amber-600 transition-all"
+                    >
+                      Xem Chi Tiết & Đặt Gói
+                    </Link>
+                  </div>
+
+                  {/* Standard Package Card */}
+                  <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-400 p-6 hover:shadow-xl transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-4xl">💚</span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-green-700">
+                          Gói Thường
+                        </h3>
+                        <p className="text-sm text-green-600">
+                          Tiết kiệm & Chất lượng
+                        </p>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-lg p-4 mb-4">
+                      <p className="text-3xl font-bold text-green-600">
+                        90,000 - 150,000đ
+                      </p>
+                      <p className="text-sm text-gray-600">VNĐ/tháng</p>
+                    </div>
+                    <ul className="space-y-2 mb-4">
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500">✓</span>
+                        <span>Phòng 4-8 người tiện nghi</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500">✓</span>
+                        <span>3 bữa chính + 1-2 bữa phụ</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500">✓</span>
+                        <span>Theo dõi sức khỏe hàng ngày</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500">✓</span>
+                        <span>Hoạt động tập thể đa dạng</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500">✓</span>
+                        <span>Phòng giải trí, sân vườn</span>
+                      </li>
+                    </ul>
+                    <Link
+                      to="/packages"
+                      className="block w-full py-3 bg-gradient-to-r from-green-400 to-green-500 text-white text-center rounded-lg font-bold hover:from-green-500 hover:to-green-600 transition-all"
+                    >
+                      Xem Chi Tiết & Đặt Gói
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="border-t-2 border-gray-200 pt-6 mb-6">
+                  <h2 className="text-2xl font-bold">Các Dịch Vụ Khác</h2>
+                </div>
+              </div>
+            )}
 
             {/* Search Bar */}
             <div className="mb-6">
@@ -182,7 +295,7 @@ export default function ActivitiesPage() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Tìm kiếm hoạt động, trò chơi, lớp học..."
+                  placeholder="Tìm kiếm dịch vụ, gói chăm sóc..."
                   className="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
                 />
                 <svg
@@ -201,10 +314,19 @@ export default function ActivitiesPage() {
               </div>
             </div>
 
+            {/* Divider */}
+            {selectedCategory === 'all' && !searchQuery && (
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-4">Các Dịch Vụ Khác</h2>
+              </div>
+            )}
+
             {/* Results Count */}
-            <p className="text-sm text-gray-600 mb-4">
-              Tìm thấy {filteredActivities.length} hoạt động
-            </p>
+            {(selectedCategory !== 'all' || searchQuery) && (
+              <p className="text-sm text-gray-600 mb-4">
+                Tìm thấy {filteredActivities.length} dịch vụ
+              </p>
+            )}
 
             {/* Loading State */}
             {loading && (
@@ -220,17 +342,48 @@ export default function ActivitiesPage() {
                 {filteredActivities.map((activity) => (
                   <div
                     key={activity._id}
-                  className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow"
+                  className={`bg-white rounded-xl border-2 overflow-hidden hover:shadow-lg transition-all ${
+                    activity.package === 'vip'
+                      ? 'border-amber-400'
+                      : 'border-gray-200'
+                  }`}
                 >
-                  <div className="aspect-video w-full overflow-hidden">
-                    <img
-                      src={activity.image}
-                      alt={activity.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                  {/* Package Badge */}
+                  <div className="relative">
+                    <div className="aspect-video w-full overflow-hidden">
+                      <img
+                        src={activity.image}
+                        alt={activity.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div
+                      className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold ${
+                        activity.package === 'vip'
+                          ? 'bg-amber-500 text-white'
+                          : 'bg-blue-500 text-white'
+                      }`}
+                    >
+                      {activity.package === 'vip' ? '👑 VIP' : '💚 Thường'}
+                    </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="text-xl font-bold mb-4">{activity.title}</h3>
+                    <div className="flex items-start justify-between mb-3">
+                      <h3 className="text-xl font-bold flex-1">
+                        {activity.title}
+                      </h3>
+                      <div className="text-right ml-2">
+                        <p className="text-lg font-bold text-green-600">
+                          {activity.price.toLocaleString('vi-VN')}đ
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {activity.priceUnit}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      {activity.description}
+                    </p>
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
                       <div className="flex items-center gap-2">
                         <svg
@@ -281,9 +434,37 @@ export default function ActivitiesPage() {
                         <span>{activity.participants}</span>
                       </div>
                     </div>
-                    <button className="w-full py-2 bg-green-100 text-green-700 rounded-lg font-semibold hover:bg-green-200 transition-colors">
-                      Xem chi tiết
-                    </button>
+
+                    {/* Features */}
+                    {activity.features && activity.features.length > 0 && (
+                      <div className="mb-4">
+                        <p className="text-xs font-semibold text-gray-700 mb-2">
+                          Đặc điểm nổi bật:
+                        </p>
+                        <ul className="space-y-1">
+                          {activity.features.slice(0, 3).map((feature, idx) => (
+                            <li
+                              key={idx}
+                              className="text-xs text-gray-600 flex items-start gap-1"
+                            >
+                              <span className="text-green-500 mt-0.5">✓</span>
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <Link
+                      to={`/activities/${activity._id}`}
+                      className={`block w-full py-2 rounded-lg font-semibold text-center transition-colors ${
+                        activity.package === 'vip'
+                          ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                          : 'bg-green-100 text-green-700 hover:bg-green-200'
+                      }`}
+                    >
+                      Xem chi tiết & Đăng ký
+                    </Link>
                   </div>
                 </div>
                 ))}
@@ -294,7 +475,7 @@ export default function ActivitiesPage() {
             {!loading && filteredActivities.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">
-                  Không tìm thấy hoạt động phù hợp
+                  Không tìm thấy dịch vụ phù hợp
                 </p>
                 <button
                   onClick={() => {

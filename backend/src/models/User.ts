@@ -6,6 +6,7 @@ export interface IUser extends Document {
   email: string;
   phone: string;
   password: string;
+  role: 'user' | 'admin';
   createdAt: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
@@ -35,6 +36,11 @@ const userSchema = new Schema<IUser>(
       required: [true, 'Vui lòng nhập mật khẩu'],
       minlength: 6,
       select: false,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
     },
   },
   {

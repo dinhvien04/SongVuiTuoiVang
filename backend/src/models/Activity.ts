@@ -9,9 +9,12 @@ export interface IActivity extends Document {
   participants: string;
   category: 'games' | 'class' | 'music' | 'sports' | 'other';
   format: 'online' | 'offline';
+  package: 'vip' | 'standard';
+  price: number;
+  priceUnit: string;
   location?: string;
   instructor?: string;
-  price?: number;
+  features: string[];
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -21,7 +24,7 @@ const activitySchema = new Schema<IActivity>(
   {
     title: {
       type: String,
-      required: [true, 'Vui lòng nhập tên hoạt động'],
+      required: [true, 'Vui lòng nhập tên dịch vụ'],
       trim: true,
     },
     description: {
@@ -43,17 +46,31 @@ const activitySchema = new Schema<IActivity>(
     },
     participants: {
       type: String,
-      required: [true, 'Vui lòng nhập số người tham gia'],
+      required: [true, 'Vui lòng nhập số người'],
     },
     category: {
       type: String,
       enum: ['games', 'class', 'music', 'sports', 'other'],
-      required: [true, 'Vui lòng chọn loại hoạt động'],
+      required: [true, 'Vui lòng chọn loại'],
     },
     format: {
       type: String,
       enum: ['online', 'offline'],
       required: [true, 'Vui lòng chọn hình thức'],
+    },
+    package: {
+      type: String,
+      enum: ['vip', 'standard'],
+      required: [true, 'Vui lòng chọn gói dịch vụ'],
+      default: 'standard',
+    },
+    price: {
+      type: Number,
+      required: [true, 'Vui lòng nhập giá'],
+    },
+    priceUnit: {
+      type: String,
+      default: 'VNĐ/tháng',
     },
     location: {
       type: String,
@@ -63,9 +80,9 @@ const activitySchema = new Schema<IActivity>(
       type: String,
       trim: true,
     },
-    price: {
-      type: Number,
-      default: 0,
+    features: {
+      type: [String],
+      default: [],
     },
     isActive: {
       type: Boolean,

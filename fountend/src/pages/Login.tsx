@@ -16,7 +16,13 @@ export default function Login() {
         localStorage.setItem('token', result.data.token);
         localStorage.setItem('user', JSON.stringify(result.data));
         alert('Đăng nhập thành công!');
-        window.location.href = '/';
+        
+        // Redirect based on role
+        if (result.data.role === 'admin') {
+          window.location.href = '/admin';
+        } else {
+          window.location.href = '/';
+        }
       } else {
         alert(result.message || 'Đăng nhập thất bại');
       }

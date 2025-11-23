@@ -19,6 +19,7 @@ export interface AuthResponse {
     name: string;
     email: string;
     phone: string;
+    role: 'user' | 'admin';
     token: string;
   };
   message?: string;
@@ -34,9 +35,12 @@ export interface Activity {
   participants: string;
   category: string;
   format: 'online' | 'offline';
+  package: 'vip' | 'standard';
+  price: number;
+  priceUnit: string;
   location?: string;
   instructor?: string;
-  price?: number;
+  features: string[];
 }
 
 export interface ActivitiesResponse {
