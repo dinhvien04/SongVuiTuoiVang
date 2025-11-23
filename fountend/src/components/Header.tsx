@@ -43,12 +43,12 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-sm hover:text-green-600">
+          <Link to="/" className="text-sm hover:text-green-600">
             Trang chủ
-          </a>
-          <a href="#" className="text-sm hover:text-green-600">
-            Hoạt động
-          </a>
+          </Link>
+          <Link to="/activities" className="text-sm hover:text-green-600">
+            Dịch Vụ
+          </Link>
           <a href="#" className="text-sm hover:text-green-600">
             Tin tức
           </a>
@@ -160,18 +160,18 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
           <nav className="flex flex-col p-4 space-y-3">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="py-2 text-sm hover:text-green-600 font-medium"
             >
               Trang chủ
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              to="/activities"
               className="py-2 text-sm hover:text-green-600 font-medium"
             >
               Hoạt động
-            </a>
+            </Link>
             <a
               href="#"
               className="py-2 text-sm hover:text-green-600 font-medium"
