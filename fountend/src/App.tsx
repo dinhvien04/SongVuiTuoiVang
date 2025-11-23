@@ -8,6 +8,7 @@ import PackagesPage from './pages/PackagesPage';
 import ActivityDetail from './pages/ActivityDetail';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ManageActivities from './pages/admin/ManageActivities';
+import ActivityForm from './pages/admin/ActivityForm';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
         <Route path="/packages" element={<PackagesPage />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/activities" element={<ManageActivities />} />
+        <Route path="/admin/activities/new" element={<ActivityForm />} />
+        <Route path="/admin/activities/edit/:id" element={<ActivityForm />} />
       </Routes>
     </Router>
   );

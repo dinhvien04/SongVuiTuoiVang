@@ -21,7 +21,9 @@ export default function ActivityDetail() {
       setLoading(true);
       const result = await activityAPI.getById(activityId);
       if (result.success && result.data) {
-        setActivity(result.data[0]);
+        // Backend returns single object, not array
+        const activityData = Array.isArray(result.data) ? result.data[0] : result.data;
+        setActivity(activityData);
       }
     } catch (error) {
       console.error('Error fetching activity:', error);

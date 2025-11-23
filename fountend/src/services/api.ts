@@ -46,7 +46,7 @@ export interface Activity {
 export interface ActivitiesResponse {
   success: boolean;
   count?: number;
-  data?: Activity[];
+  data?: Activity[] | Activity; // Can be array or single object
   message?: string;
 }
 
@@ -89,30 +89,62 @@ export const activityAPI = {
     format?: string;
     search?: string;
   }): Promise<ActivitiesResponse> => {
-    const queryParams = new URLSearchParams();
-    if (params?.category) queryParams.append('category', params.category);
-    if (params?.format) queryParams.append('format', params.format);
-    if (params?.search) queryParams.append('search', params.search);
+    try {
+      const queryParams = new URLSearchParams();
+      if (params?.category) queryParams.append('category', params.category);
+      if (params?.format) queryParams.append('format', params.format);
+      if (params?.search) queryParams.append('search', params.search);
 
-    const response = await fetch(
-      `${API_URL}/activities?${queryParams.toString()}`
-    );
-    return response.json();
+      const response = await fetch(
+        `${API_URL}/activities?${queryParams.toString()}`
+      );
+      
+      if (!response.ok) {
+        return { success: false, message: 'Failed to fetch activities' };
+      }
+      
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching activities:', error);
+      return { success: false, message: 'Network error' };
+    }
   },
 
   getById: async (id: string): Promise<ActivitiesResponse> => {
-    const response = await fetch(`${API_URL}/activities/${id}`);
-    return response.json();
+    try {
+      const response = await fetch(`${API_URL}/activities/${id}`);
+      
+      if (!response.ok) {
+        return { success: false, message: 'Activity not found' };
+      }
+      
+      return response.json();
+    } catch (error) {
+      console.error('Error fetching activity:', error);
+      return { success: false, message: 'Network error' };
+    }
   },
 
   create: async (data: Partial<Activity>): Promise<ActivitiesResponse> => {
-    const response = await fetch(`${API_URL}/activities`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return response.json();
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_URL}/activities`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        return { success: false, message: 'Failed to create activity' };
+      }
+      
+      return response.json();
+    } catch (error) {
+      console.error('Error creating activity:', error);
+      return { success: false, message: 'Network error' };
+    }
   },
 };

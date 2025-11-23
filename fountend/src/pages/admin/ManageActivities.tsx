@@ -32,7 +32,7 @@ export default function ManageActivities() {
       setLoading(true);
       const result = await activityAPI.getAll();
       if (result.success && result.data) {
-        setActivities(result.data);
+        setActivities(Array.isArray(result.data) ? result.data : [result.data]);
       }
     } catch (error) {
       console.error('Error fetching activities:', error);
