@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { setAuth, clearAuth } from '../utils/auth';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,12 +10,15 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      // Clear any existing auth data first
+      clearAuth();
+      
       const { authAPI } = await import('../services/api');
       const result = await authAPI.login({ email, password });
       
       if (result.success && result.data) {
-        localStorage.setItem('token', result.data.token);
-        localStorage.setItem('user', JSON.stringify(result.data));
+        // Use auth utility to safely store credentials
+        setAuth(result.data.token, result.data);
         alert('Đăng nhập thành công!');
         
         // Redirect based on role
@@ -28,6 +32,7 @@ export default function Login() {
       }
     } catch (error) {
       console.error('Login error:', error);
+      clearAuth();
       alert('Có lỗi xảy ra. Vui lòng thử lại!');
     }
   };

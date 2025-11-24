@@ -81,6 +81,29 @@ export const authAPI = {
     });
     return response.json();
   },
+
+  updateProfile: async (data: any): Promise<AuthResponse> => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_URL}/auth/profile`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        return { success: false, message: 'Failed to update profile' };
+      }
+      
+      return response.json();
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      return { success: false, message: 'Network error' };
+    }
+  },
 };
 
 export const activityAPI = {

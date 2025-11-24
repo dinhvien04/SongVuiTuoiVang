@@ -6,6 +6,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import ActivitiesPage from './pages/ActivitiesPage';
 import PackagesPage from './pages/PackagesPage';
 import ActivityDetail from './pages/ActivityDetail';
+import Profile from './pages/Profile';
+import EditProfile from './pages/EditProfile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ManageActivities from './pages/admin/ManageActivities';
 import ActivityForm from './pages/admin/ActivityForm';
@@ -21,6 +23,8 @@ function App() {
         <Route path="/activities" element={<ActivitiesPage />} />
         <Route path="/activities/:id" element={<ActivityDetail />} />
         <Route path="/packages" element={<PackagesPage />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/activities" element={<ManageActivities />} />
         <Route path="/admin/activities/new" element={<ActivityForm />} />

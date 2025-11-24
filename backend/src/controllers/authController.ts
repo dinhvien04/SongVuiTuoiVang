@@ -118,3 +118,51 @@ export const getMe = async (req: Request, res: Response) => {
     });
   }
 };
+
+// @desc    Update user profile
+// @route   PUT /api/auth/profile
+export const updateProfile = async (req: Request, res: Response) => {
+  try {
+    const { name, phone, dateOfBirth, gender, address, insuranceCard } = req.body;
+
+    const user = await User.findById((req as any).userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Không tìm thấy người dùng',
+      });
+    }
+
+    // Update fields
+    if (name) user.name = name;
+    if (phone) user.phone = phone;
+    if (dateOfBirth !== undefined) user.dateOfBirth = dateOfBirth;
+    if (gender !== undefined) user.gender = gender;
+    if (address !== undefined) user.address = address;
+    if (insuranceCard !== undefined) user.insuranceCard = insuranceCard;
+
+    await user.save();
+
+    res.json({
+      success: true,
+      data: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        dateOfBirth: user.dateOfBirth,
+        gender: user.gender,
+        address: user.address,
+        insuranceCard: user.insuranceCard,
+      },
+      message: 'Cập nhật thông tin thành công',
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi cập nhật thông tin',
+    });
+  }
+};

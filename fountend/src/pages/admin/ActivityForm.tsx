@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { activityAPI } from '../../services/api';
 import Header from '../../components/Header';
+import { getUser, checkAuth, clearAuth } from '../../utils/auth';
 
 export default function ActivityForm() {
   const navigate = useNavigate();
@@ -27,14 +28,22 @@ export default function ActivityForm() {
   });
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (!userData) {
+    // Check if auth is valid
+    if (!checkAuth()) {
+      clearAuth();
+      alert('Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại!');
       navigate('/login');
       return;
     }
 
-    const user = JSON.parse(userData);
+    const user = getUser();
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
     if (user.role !== 'admin') {
+      alert('Bạn không có quyền truy cập trang này!');
       navigate('/');
       return;
     }

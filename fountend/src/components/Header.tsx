@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { getUser, clearAuth, checkAuth } from '../utils/auth';
 
 export default function Header() {
   const [user, setUser] = useState<any>(null);
@@ -7,15 +8,21 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      setUser(JSON.parse(userData));
+    // Check if auth is valid
+    if (checkAuth()) {
+      const userData = getUser();
+      if (userData) {
+        setUser(userData);
+      }
+    } else {
+      // Token expired or invalid, clear auth
+      clearAuth();
+      setUser(null);
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    clearAuth();
     setUser(null);
     window.location.href = '/';
   };
@@ -87,18 +94,20 @@ export default function Header() {
                     <p className="text-sm font-semibold">{user.name}</p>
                     <p className="text-xs text-gray-500">{user.email}</p>
                   </div>
-                  <a
-                    href="#"
+                  <Link
+                    to="/profile"
                     className="block px-4 py-2 text-sm hover:bg-gray-50"
                   >
-                    Trang cá nhân
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm hover:bg-gray-50"
-                  >
-                    Cài đặt
-                  </a>
+                    Thông tin cá nhân
+                  </Link>
+                  {user.role === 'admin' && (
+                    <Link
+                      to="/admin"
+                      className="block px-4 py-2 text-sm hover:bg-gray-50"
+                    >
+                      Quản trị
+                    </Link>
+                  )}
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50"
