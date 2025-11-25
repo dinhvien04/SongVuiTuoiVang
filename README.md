@@ -1,4 +1,4 @@
-# 🌟 Sống Vui Khỏe - Nền tảng kết nối người cao tuổi
+# 🌟 Dự án khởi nghiệp - Sóng khỏe tuổi vàng (Khu vui chơi giải trí cho người cao tuôi)
 
 Một nền tảng web hiện đại giúp người cao tuổi kết nối, tham gia các hoạt động giải trí và duy trì lối sống khỏe mạnh.
 
