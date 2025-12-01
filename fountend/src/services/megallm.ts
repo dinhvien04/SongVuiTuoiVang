@@ -1,5 +1,5 @@
 // Backend API Service (gọi backend thay vì gọi trực tiếp MegaLLM)
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 export interface ChatMessage {
     role: 'user' | 'assistant' | 'system';
