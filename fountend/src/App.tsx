@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
+import AIChatBot from './components/AIChatBot';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -48,6 +49,8 @@ function App() {
           <Route path="/admin/activities/new" element={<ActivityForm />} />
           <Route path="/admin/activities/edit/:id" element={<ActivityForm />} />
         </Routes>
+        {/* AI Chatbot - hiện ở tất cả các trang */}
+        <AIChatBot />
       </Router>
     </CartProvider>
   );

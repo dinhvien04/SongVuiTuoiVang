@@ -1,17 +1,20 @@
+import dotenv from 'dotenv';
+
+// Load environment variables FIRST before any other imports
+dotenv.config();
+
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import { connectDB } from './config/database';
 import authRoutes from './routes/authRoutes';
 import otpRoutes from './routes/otpRoutes';
 import activityRoutes from './routes/activityRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 import orderRoutes from './routes/orderRoutes';
-
-dotenv.config();
+import aiRoutes from './routes/aiRoutes';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT || '5000', 10);
 
 // Connect to MongoDB
 connectDB();
@@ -35,6 +38,7 @@ app.use('/api/otp', otpRoutes);
 app.use('/api/activities', activityRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/ai', aiRoutes);
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on http://localhost:${PORT}`);
