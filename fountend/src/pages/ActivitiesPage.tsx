@@ -74,8 +74,8 @@ export default function ActivitiesPage() {
                         : 'hover:bg-gray-100'
                     }`}
                   >
-                    <span className="text-xl"></span>
-                    <span className="text-sm font-medium">Gói Dịch vụ</span>
+                    <span className="text-xl">📋</span>
+                    <span className="text-sm font-medium">Tất cả</span>
                   </button>
                   <button
                     onClick={() => setSelectedCategory('games')}
@@ -85,8 +85,8 @@ export default function ActivitiesPage() {
                         : 'hover:bg-gray-100'
                     }`}
                   >
-                    <span className="text-xl"></span>
-                    <span className="text-sm font-medium">Chăm sóc sức khỏe</span>
+                    <span className="text-xl">🎮</span>
+                    <span className="text-sm font-medium">Trò chơi / Giải trí</span>
                   </button>
                   <button
                     onClick={() => setSelectedCategory('class')}
@@ -96,8 +96,8 @@ export default function ActivitiesPage() {
                         : 'hover:bg-gray-100'
                     }`}
                   >
-                    <span className="text-xl"></span>
-                    <span className="text-sm font-medium">Giải trí</span>
+                    <span className="text-xl">💚</span>
+                    <span className="text-sm font-medium">Chăm sóc sức khỏe</span>
                   </button>
                   <button
                     onClick={() => setSelectedCategory('music')}
@@ -107,8 +107,8 @@ export default function ActivitiesPage() {
                         : 'hover:bg-gray-100'
                     }`}
                   >
-                    <span className="text-xl"></span>
-                    <span className="text-sm font-medium">Tham quan Du lịch</span>
+                    <span className="text-xl">🎵</span>
+                    <span className="text-sm font-medium">Âm nhạc</span>
                   </button>
                   <button
                     onClick={() => setSelectedCategory('sports')}
@@ -118,8 +118,19 @@ export default function ActivitiesPage() {
                         : 'hover:bg-gray-100'
                     }`}
                   >
-                    <span className="text-xl"></span>
-                    <span className="text-sm font-medium">quà Lưu niệm</span>
+                    <span className="text-xl">🏃</span>
+                    <span className="text-sm font-medium">Thể thao / Du lịch</span>
+                  </button>
+                  <button
+                    onClick={() => setSelectedCategory('other')}
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
+                      selectedCategory === 'other'
+                        ? 'bg-green-100 text-green-700'
+                        : 'hover:bg-gray-100'
+                    }`}
+                  >
+                    <span className="text-xl">📦</span>
+                    <span className="text-sm font-medium">Khác</span>
                   </button>
                 </div>
               </div>
@@ -183,73 +194,24 @@ export default function ActivitiesPage() {
               <div className="mb-8">
                 <h2 className="text-2xl font-bold mb-4">Gói Dịch Vụ Chăm Sóc</h2>
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  {/* VIP Package Card */}
-                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl border-2 border-amber-400 p-6 hover:shadow-xl transition-all">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">👑</span>
-                      <div>
-                        <h3 className="text-2xl font-bold text-amber-700">
-                          Gói VIP
-                        </h3>
-                        <p className="text-sm text-amber-600">
-                          Cao cấp & Toàn diện
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bg-white rounded-lg p-4 mb-4">
-                      <p className="text-3xl font-bold text-amber-600">
-                        180,000 - 400,000đ
-                      </p>
-                      <p className="text-sm text-gray-600">VNĐ/tháng</p>
-                    </div>
-                    <ul className="space-y-2 mb-4">
-                      <li className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">✓</span>
-                        <span>Phòng đơn/đôi cao cấp 4-5 sao</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">✓</span>
-                        <span>Tỉ lệ chăm sóc 1:2-3</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">✓</span>
-                        <span>Bác sĩ theo dõi thường xuyên</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">✓</span>
-                        <span>Thực đơn riêng biệt</span>
-                      </li>
-                      <li className="flex items-start gap-2 text-sm">
-                        <span className="text-amber-500">✓</span>
-                        <span>Dịch vụ làm đẹp cao cấp</span>
-                      </li>
-                    </ul>
-                    <Link
-                      to="/packages"
-                      className="block w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-center rounded-lg font-bold hover:from-amber-500 hover:to-amber-600 transition-all"
-                    >
-                      Xem Chi Tiết & Đặt Gói
-                    </Link>
-                  </div>
-
-                  {/* Standard Package Card */}
+                  {/* Standard Package Card - BÊN TRÁI */}
                   <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl border-2 border-green-400 p-6 hover:shadow-xl transition-all">
                     <div className="flex items-center gap-3 mb-4">
-                      <span className="text-4xl">💚</span>
+                      <span className="text-4xl"></span>
                       <div>
-                        <h3 className="text-2xl font-bold text-green-700">
+                        <h3 className="text-2xl font-bold text-amber-700">
                           Gói Thường
                         </h3>
-                        <p className="text-sm text-green-600">
-                          Tiết kiệm & Chất lượng
+                        <p className="text-sm text-amber-600">
+                           Tiết kiệm & Chất lượng
                         </p>
                       </div>
                     </div>
                     <div className="bg-white rounded-lg p-4 mb-4">
                       <p className="text-3xl font-bold text-green-600">
-                        90,000 - 150,000đ
+                        250,000đ VND/ngày
                       </p>
-                      <p className="text-sm text-gray-600">VNĐ/tháng</p>
+                      {/* <p className="text-sm text-gray-600">VNĐ/tháng</p> */}
                     </div>
                     <ul className="space-y-2 mb-4">
                       <li className="flex items-start gap-2 text-sm">
@@ -276,6 +238,55 @@ export default function ActivitiesPage() {
                     <Link
                       to="/packages"
                       className="block w-full py-3 bg-gradient-to-r from-green-400 to-green-500 text-white text-center rounded-lg font-bold hover:from-green-500 hover:to-green-600 transition-all"
+                    >
+                      Xem Chi Tiết & Đặt Gói
+                    </Link>
+                  </div>
+
+                  {/* VIP Package Card - BÊN PHẢI */}
+                  <div className="bg-gradient-to-br from-amber-50 to-amber-100 rounded-xl border-2 border-amber-400 p-6 hover:shadow-xl transition-all">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className="text-4xl"></span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-amber-700">
+                          Gói VIP
+                        </h3>
+                        <p className="text-sm text-amber-600">
+                          Cao cấp & Toàn diện
+                        </p>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-lg p-4 mb-4">
+                      <p className="text-3xl font-bold text-amber-600">
+                        400,000đ VND/ngày
+                      </p>
+                      {/* <p className="text-sm text-gray-600">VNĐ/tháng</p> */}
+                    </div>
+                    <ul className="space-y-2 mb-4">
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Phòng đơn/đôi cao cấp 4-5 sao</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Tỉ lệ chăm sóc 1:2-3</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Bác sĩ theo dõi thường xuyên</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Thực đơn riêng biệt</span>
+                      </li>
+                      <li className="flex items-start gap-2 text-sm">
+                        <span className="text-amber-500">✓</span>
+                        <span>Dịch vụ làm đẹp cao cấp</span>
+                      </li>
+                    </ul>
+                    <Link
+                      to="/packages"
+                      className="block w-full py-3 bg-gradient-to-r from-amber-400 to-amber-500 text-white text-center rounded-lg font-bold hover:from-amber-500 hover:to-amber-600 transition-all"
                     >
                       Xem Chi Tiết & Đặt Gói
                     </Link>

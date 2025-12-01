@@ -114,7 +114,7 @@ const EditProfile = () => {
               <textarea name="address" value={formData.address} onChange={handleChange} rows={3} className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none" />
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-2">Thẻ bảo hiểm y tế</label>
+              <label className="block text-sm font-semibold mb-2">Căn cước công dân</label>
               <label className="cursor-pointer block">
                 <div className="flex items-center justify-center gap-2 px-4 py-3 border-2 border-dashed rounded-lg hover:border-green-500 hover:bg-green-50">
                   <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

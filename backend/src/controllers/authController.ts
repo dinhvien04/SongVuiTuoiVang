@@ -42,6 +42,10 @@ export const register = async (req: Request, res: Response) => {
           email: user.email,
           phone: user.phone,
           role: user.role,
+          dateOfBirth: user.dateOfBirth,
+          gender: user.gender,
+          address: user.address,
+          insuranceCard: user.insuranceCard,
           token: generateToken(user._id.toString()),
         },
       });
@@ -90,6 +94,10 @@ export const login = async (req: Request, res: Response) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        dateOfBirth: user.dateOfBirth,
+        gender: user.gender,
+        address: user.address,
+        insuranceCard: user.insuranceCard,
         token: generateToken(user._id.toString()),
       },
     });
@@ -115,6 +123,81 @@ export const getMe = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: error.message || 'Lỗi server',
+    });
+  }
+};
+
+// @desc    Get all users (Admin only)
+// @route   GET /api/auth/users
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find().select('-password').sort({ createdAt: -1 });
+    
+    res.json({
+      success: true,
+      data: users,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Lỗi server',
+    });
+  }
+};
+
+// @desc    Update user role (Admin only)
+// @route   PUT /api/auth/users/:id/role
+export const updateUserRole = async (req: Request, res: Response) => {
+  try {
+    const { role } = req.body;
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Không tìm thấy người dùng',
+      });
+    }
+
+    user.role = role;
+    await user.save();
+
+    res.json({
+      success: true,
+      data: user,
+      message: 'Cập nhật quyền thành công',
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi cập nhật quyền',
+    });
+  }
+};
+
+// @desc    Delete user (Admin only)
+// @route   DELETE /api/auth/users/:id
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'Không tìm thấy người dùng',
+      });
+    }
+
+    await user.deleteOne();
+
+    res.json({
+      success: true,
+      message: 'Xóa người dùng thành công',
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Lỗi xóa người dùng',
     });
   }
 };

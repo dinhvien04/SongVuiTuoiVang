@@ -132,6 +132,28 @@ export default function ActivityForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.image || formData.image.trim() === '') {
+      alert('Vui lòng thêm hình ảnh cho dịch vụ!');
+      return;
+    }
+    
+    if (!formData.title || formData.title.trim() === '') {
+      alert('Vui lòng nhập tên dịch vụ!');
+      return;
+    }
+    
+    if (!formData.description || formData.description.trim() === '') {
+      alert('Vui lòng nhập mô tả!');
+      return;
+    }
+    
+    if (formData.price <= 0) {
+      alert('Vui lòng nhập giá hợp lệ!');
+      return;
+    }
+    
     setLoading(true);
 
     try {
@@ -144,6 +166,8 @@ export default function ActivityForm() {
 
       const dataToSend = {
         ...formData,
+        // Use placeholder image if no image uploaded
+        image: formData.image || 'https://via.placeholder.com/400x300?text=No+Image',
         features: formData.features.filter((f) => f.trim() !== ''),
         price: Number(formData.price),
         format: formData.format as 'online' | 'offline',
@@ -173,11 +197,23 @@ export default function ActivityForm() {
         alert(isEdit ? 'Cập nhật thành công!' : 'Thêm dịch vụ thành công!');
         navigate('/admin/activities');
       } else {
-        alert(result.message || 'Có lỗi xảy ra');
+        // Show detailed error message
+        const errorMsg = result.message || 'Có lỗi xảy ra';
+        if (errorMsg.includes('image')) {
+          alert('❌ Lỗi: Vui lòng thêm hình ảnh cho dịch vụ!\n\nBạn có thể:\n- Upload ảnh từ máy tính\n- Hoặc nhập URL hình ảnh');
+        } else if (errorMsg.includes('title')) {
+          alert('❌ Lỗi: Vui lòng nhập tên dịch vụ!');
+        } else if (errorMsg.includes('description')) {
+          alert('❌ Lỗi: Vui lòng nhập mô tả chi tiết!');
+        } else if (errorMsg.includes('price')) {
+          alert('❌ Lỗi: Vui lòng nhập giá hợp lệ (lớn hơn 0)!');
+        } else {
+          alert(`❌ Lỗi: ${errorMsg}`);
+        }
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Có lỗi xảy ra. Vui lòng thử lại!');
+      alert('❌ Có lỗi xảy ra. Vui lòng kiểm tra lại thông tin và thử lại!');
     } finally {
       setLoading(false);
     }
@@ -208,6 +244,22 @@ export default function ActivityForm() {
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 shadow-sm">
+          {/* Required Fields Notice */}
+          <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div className="flex items-start gap-3">
+              <svg className="w-5 h-5 text-blue-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p className="text-sm font-semibold text-blue-900">Lưu ý khi thêm dịch vụ</p>
+                <p className="text-sm text-blue-700 mt-1">
+                  Các trường có dấu <span className="text-red-500 font-bold">*</span> là bắt buộc phải điền.
+                  Đặc biệt, bạn cần upload hoặc nhập URL hình ảnh cho dịch vụ.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="space-y-6">
             {/* Title */}
             <div>
@@ -364,11 +416,11 @@ export default function ActivityForm() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
                   required
                 >
-                  <option value="other">Giải Dịch vụ</option>
-                  <option value="class">Chăm sóc sức khỏe</option>
-                  <option value="music">Giải trí</option>
-                  <option value="sports">Tham quan Du lịch</option>
-                  <option value="games">Quà Lưu niệm</option>
+                  <option value="games">🎮 Trò chơi / Giải trí</option>
+                  <option value="class">💚 Chăm sóc sức khỏe</option>
+                  <option value="music">🎵 Âm nhạc</option>
+                  <option value="sports">🏃 Thể thao / Du lịch</option>
+                  <option value="other">📦 Khác</option>
                 </select>
               </div>
             </div>

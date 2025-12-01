@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getUser, clearAuth, checkAuth } from '../utils/auth';
+import { useCart } from '../context/CartContext';
 
 export default function Header() {
+  const { itemCount } = useCart();
   const [user, setUser] = useState<any>(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,7 +51,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
           <Link to="/" className="text-sm hover:text-green-600">
             Trang chủ
           </Link>
@@ -62,6 +64,30 @@ export default function Header() {
           <a href="#" className="text-sm hover:text-green-600">
             Liên hệ
           </a>
+
+          {/* Cart Icon */}
+          {user && (
+            <Link to="/cart" className="relative">
+              <svg
+                className="w-6 h-6 text-gray-700 hover:text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              {itemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
+            </Link>
+          )}
 
           {user ? (
             <div className="relative">
@@ -216,7 +242,7 @@ export default function Header() {
                     href="#"
                     className="block py-2 text-sm hover:text-green-600"
                   >
-                    Cài ��ặt
+                    Cài Đặt
                   </a>
                   <button
                     onClick={handleLogout}

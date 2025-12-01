@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <div className="relative rounded-xl md:rounded-2xl overflow-hidden h-[300px] md:h-[400px] flex items-center justify-center text-center px-4 md:px-8 mt-4">
       <div
@@ -19,7 +23,10 @@ export default function Hero() {
           <br className="hidden md:block" />
           những người bạn tuyệt vời.
         </p>
-        <button className="px-5 py-2.5 md:px-6 md:py-3 bg-green-500 text-white rounded-lg text-sm md:text-base font-semibold hover:bg-green-600 transition-colors">
+        <button 
+          onClick={() => navigate('/activities')}
+          className="px-5 py-2.5 md:px-6 md:py-3 bg-green-500 text-white rounded-lg text-sm md:text-base font-semibold hover:bg-green-600 transition-colors"
+        >
           Khám Phá Ngay
         </button>
       </div>

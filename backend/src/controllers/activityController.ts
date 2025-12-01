@@ -68,13 +68,27 @@ export const getActivity = async (req: Request, res: Response) => {
 // @route   POST /api/activities
 export const createActivity = async (req: Request, res: Response) => {
   try {
+    console.log('=== CREATE ACTIVITY REQUEST ===');
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+    
     const activity = await Activity.create(req.body);
+
+    console.log('Activity created successfully');
+    console.log('===============================');
 
     res.status(201).json({
       success: true,
       data: activity,
     });
   } catch (error: any) {
+    console.error('=== CREATE ACTIVITY ERROR ===');
+    console.error('Error:', error);
+    console.error('Error message:', error.message);
+    if (error.errors) {
+      console.error('Validation errors:', error.errors);
+    }
+    console.error('=============================');
+    
     res.status(400).json({
       success: false,
       message: error.message || 'Lỗi tạo hoạt động',

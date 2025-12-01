@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"path": "../../../../365"
+		},
+		{
+			"path": "../../../../New folder/co"
+		},
+		{
+			"path": "../../../../auto_document_reader"
+		},
+		{
+			"path": "../../../../Voiec"
+		},
+		{
+			"path": "../../../../crud-be"
+		},
+		{
+			"path": "../../../../TrucQuanHoa"
+		},
+		{
+			"path": "C:/xampp/htdocs/BanAcc"
+		},
+		{
+			"path": "C:/xampp/htdocs/BT-Shop"
+		},
+		{
+			"path": "../../.."
+		}
+	],
+	"settings": {
+		"powershell.cwd": "java"
+	}
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import HotlineButton from '../components/HotlineButton';
@@ -7,6 +7,7 @@ import { activityAPI, Activity } from '../services/api';
 
 export default function ActivityDetail() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [activity, setActivity] = useState<Activity | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -34,8 +35,11 @@ export default function ActivityDetail() {
 
   const handleRegister = () => {
     if (!activity) return;
-    // TODO: Implement registration logic
-    alert(`Đăng ký tham gia: ${activity.title}`);
+    navigate(
+      `/booking?type=activity&name=${encodeURIComponent(activity.title)}&package=${
+        activity.package || 'standard'
+      }&id=${activity._id}`
+    );
   };
 
   if (loading) {
